@@ -7,7 +7,7 @@ import (
 )
 
 func Ready(session *discordgo.Session, event *discordgo.Ready) {
-	err := session.UpdateListeningStatus("nyx help")
+	err := session.UpdateListeningStatus("/help")
 	if err != nil {
 		logger.Logger.WarningF("[ERROR]: %s", err.Error())
 	}
