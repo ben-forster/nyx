@@ -1,6 +1,7 @@
 package config
 
 import (
+	"encoding/json"
 	"os"
 
 	"nyx/logger"
@@ -9,14 +10,47 @@ import (
 )
 
 var (
-	Token			string
+	Token					string
+	EmbedColor 				int
+	DeleteAfter 			int
+
+	config *configStruct
 )
 
-func init() {
+type configStruct struct {
+	EmbedColor				int
+	DeleteAfter 			int
+}
+
+func ReadEnv() error {
+	logger.Logger.InfoF("Loading environmental variables.")
 	err := godotenv.Load()
 	if err != nil {
 		logger.Logger.Fatal("[ERROR]: " + err.Error())
 	}
 
 	Token = os.Getenv("BOT_TOKEN")
+	logger.Logger.Infof("Environmental variables loaded.")
+
+	return nil
+}
+
+func ReadConfig() error {	
+	logger.Logger.InfoF("Loading configuration file.")
+	file, err := os.ReadFile("config/config.json")
+	if err != nil {
+		logger.Logger.Fatal("[ERROR]: " + err.Error())
+	}
+
+	err = json.Unmarshal(file, &config)
+
+	if err != nil {
+		logger.Logger.Fatal("[ERROR]: " + err.Error())
+	}
+	logger.Logger.InfoF("Configuration file loaded.")
+
+	EmbedColor = config.EmbedColor
+	DeleteAfter = config.DeleteAfter
+
+	return nil
 }
