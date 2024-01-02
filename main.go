@@ -64,5 +64,6 @@ func shutdown() {
 	logger.Logger.InfoF(s.State.User.Username + " is shutting down.")
 
 	commands.Remove(s)
+	
 	s.Close()
 }
