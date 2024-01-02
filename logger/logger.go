@@ -8,7 +8,7 @@ import (
 	"github.com/apsdehal/go-logger"
 )
 
-const log_file = "log.log"
+const log_file = "logs/log.log"
 
 var Logger *logger.Logger
 
