@@ -30,7 +30,7 @@ func Create(s *discordgo.Session) {
 }
 
 func Remove(s *discordgo.Session) {
-	logger.Logger.Info("Loading commands.")
+	logger.Logger.Info("Removing commands.")
 	for _, command := range commands {
 		logger.Logger.InfoF("%vRemoving command: ", command.Name)
 		err := s.ApplicationCommandDelete(s.State.User.ID, "", command.ID)
