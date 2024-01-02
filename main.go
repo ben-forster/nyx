@@ -61,6 +61,6 @@ func shutdown() {
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
 	<-sc
 
-	logger.Logger.InfoF(session.State.User.Username + "is shutting down.")
+	logger.Logger.InfoF(session.State.User.Username + " is shutting down.")
 	session.Close()
 }
