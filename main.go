@@ -17,7 +17,7 @@ import (
 )
 
 var (
-	session 	*discordgo.Session
+	s 	*discordgo.Session
 )
 
 func main() {
@@ -36,7 +36,7 @@ func main() {
       	logger.Logger.FatalF("[ERROR]: %v", err.Error())
         return
     }
-	defer session.Close()
+	defer s.Close()
 
 	bot.AddHandler(events.Ready)
 	bot.AddHandler(events.InteractionCreate)
@@ -50,7 +50,7 @@ func main() {
     }
 
 	if flagMigrateCommands {
-		commands.Migrate(bot)
+		commands.Create(s)
 	}
 
 	shutdown()
@@ -61,6 +61,8 @@ func shutdown() {
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
 	<-sc
 
-	logger.Logger.InfoF(session.State.User.Username + " is shutting down.")
-	session.Close()
+	logger.Logger.InfoF(s.State.User.Username + " is shutting down.")
+
+	commands.Remove(s)
+	s.Close()
 }
