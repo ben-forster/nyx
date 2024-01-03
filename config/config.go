@@ -12,14 +12,14 @@ import (
 var (
 	Token					string
 	EmbedColor 				int
-	DeleteAfter 			int
+	DeleteAfter 				int
 
 	config *configStruct
 )
 
 type configStruct struct {
 	EmbedColor				int
-	DeleteAfter 			int
+	DeleteAfter 				int
 }
 
 func ReadEnv() error {
