@@ -2,7 +2,6 @@
 # https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
 #
 # Binaries for programs and plugins
-*/vscode
 *.env
 *.exe
 *.exe~
@@ -16,6 +15,9 @@
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
+# Directories
+/.vscode
+/tests
 
 # Go workspace file
 go.work
