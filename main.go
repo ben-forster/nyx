@@ -10,7 +10,7 @@ import (
 	"nyx/commands"
 	"nyx/config"
 	"nyx/logger"
-	"nyx/db"
+	"nyx/database"
 	"nyx/events"
 
 	"github.com/bwmarrin/discordgo"
@@ -27,7 +27,7 @@ func main() {
 
 	flag.Parse()
 
-	db.Connect()
+	database.Connect()
 	config.ReadEnv()
 	config.ReadConfig()
 
