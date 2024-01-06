@@ -57,6 +57,9 @@ func ReadConfig() error {
 
 	EmbedColor = config.EmbedColor
 	DeleteAfter = config.DeleteAfter
+	Checkmark = config.Checkmark
+	Cross = config.Cross
+	Info = config.Info
 
 	return nil
 }
