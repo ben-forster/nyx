@@ -18,7 +18,7 @@ func PingHandler(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	pingingEmbed := &discordgo.MessageEmbed{}
 	pingingEmbed.Description = "**Pinging...**"
 	pingingEmbed.Timestamp = time.Now().Format(time.RFC3339)
-	pingingEmbed.Color = config.Embed
+	pingingEmbed.Color = config.EmbedColor
 
 	if err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 		Type: discordgo.InteractionResponseChannelMessageWithSource,
@@ -34,7 +34,7 @@ func PingHandler(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			IconURL: i.Member.User.AvatarURL(""),
 		}
 		errorEmbed.Timestamp = time.Now().Format(time.RFC3339)
-		errorEmbed.Color = config.Embed
+		errorEmbed.Color = config.EmbedColor
 	
 		s.InteractionResponseEdit(i.Interaction, &discordgo.WebhookEdit{
 			Embeds: &[]*discordgo.MessageEmbed{errorEmbed},
@@ -54,7 +54,7 @@ func PingHandler(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			IconURL: i.Member.User.AvatarURL(""),
 		}
 		errorEmbed.Timestamp = time.Now().Format(time.RFC3339)
-		errorEmbed.Color = config.Embed
+		errorEmbed.Color = config.EmbedColor
 	
 		s.InteractionResponseEdit(i.Interaction, &discordgo.WebhookEdit{
 			Embeds: &[]*discordgo.MessageEmbed{errorEmbed},
@@ -74,7 +74,7 @@ func PingHandler(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		IconURL: i.Member.User.AvatarURL(""),
 	}
 	pingEmbed.Timestamp = time.Now().Format(time.RFC3339)
-	pingEmbed.Color = config.Embed
+	pingEmbed.Color = config.EmbedColor
 
 	s.InteractionResponseEdit(i.Interaction, &discordgo.WebhookEdit{
 		Embeds: &[]*discordgo.MessageEmbed{pingEmbed},
