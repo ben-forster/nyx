@@ -13,6 +13,9 @@ var (
 	Token					string
 	EmbedColor 				int
 	DeleteAfter 				int
+	Checkmark      				string
+	Cross 					string
+	Info 					string
 
 	config *configStruct
 )
@@ -20,6 +23,9 @@ var (
 type configStruct struct {
 	EmbedColor				int
 	DeleteAfter 				int
+	Checkmark      				string
+	Cross 					string
+	Info 					string
 }
 
 func ReadEnv() error {
