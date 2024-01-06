@@ -77,7 +77,7 @@ func EightBallHandler(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			Text:    i.Member.User.Username,
 			IconURL: i.Member.User.AvatarURL(""),
 		}
-		eightballEmbed.Color = config.Embed
+		eightballEmbed.Color = config.EmbedColor
 
 		s.InteractionResponseEdit(i.Interaction, &discordgo.WebhookEdit{
 			Embeds: &[]*discordgo.MessageEmbed{eightballEmbed},
@@ -92,7 +92,7 @@ func EightBallHandler(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			Text:    i.Member.User.Username,
 			IconURL: i.Member.User.AvatarURL(""),
 		}
-		errorEmbed.Color = config.Embed
+		errorEmbed.Color = config.EmbedColor
 
 		s.InteractionResponseEdit(i.Interaction, &discordgo.WebhookEdit{
 			Embeds: &[]*discordgo.MessageEmbed{errorEmbed},
