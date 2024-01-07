@@ -96,6 +96,7 @@ func WeatherHandler(s *discordgo.Session, i *discordgo.InteractionCreate) {
 
 	var data WeatherHTTPData
 	err = json.NewDecoder(response.Body).Decode(&data)
+	
 	if err != nil {
 		errorEmbed := &discordgo.MessageEmbed{}
 		errorEmbed.Title = config.Cross + " Error"
