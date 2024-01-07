@@ -9,21 +9,21 @@ import (
 
 	"nyx/commands"
 	"nyx/config"
-	"nyx/logger"
 	"nyx/database"
 	"nyx/events"
+	"nyx/logger"
 
 	"github.com/bwmarrin/discordgo"
 )
 
 var (
-	s 	*discordgo.Session
+	session 	*discordgo.Session
 )
 
 func main() {
 	var flagMigrateCommands bool
 
-	flag.BoolVar(&flagMigrateCommands, "commands", false, "Update commands.")
+	flag.BoolVar(&flagMigrateCommands, "commands", true, "Update commands.")
 
 	flag.Parse()
 
@@ -31,19 +31,21 @@ func main() {
 	config.ReadEnv()
 	config.ReadConfig()
 
-	bot, err := discordgo.New(fmt.Sprintf("Bot %v", config.Token))
+	s, err := discordgo.New(fmt.Sprintf("Bot %v", config.Token))
 	if err != nil {
-		logger.Logger.FatalF("[ERROR]: %v", err.Error())
-	        return
+	      logger.Logger.FatalF("[ERROR]: %v", err.Error())
+		return
 	}
 	defer s.Close()
 
-	bot.AddHandler(events.Ready)
-	bot.AddHandler(events.InteractionCreate)
+	session = s
 
-	bot.Identify.Intents = discordgo.MakeIntent(discordgo.IntentsAllWithoutPrivileged | discordgo.IntentsGuildPresences | discordgo.IntentsGuildMembers)
+	s.Identify.Intents = discordgo.IntentsAllWithoutPrivileged | discordgo.IntentsGuildPresences | discordgo.IntentsGuildMembers
 
-	err = bot.Open()
+	s.AddHandler(events.Ready)
+	s.AddHandler(events.InteractionCreate)
+
+	err = s.Open()
 	if err != nil {
 		logger.Logger.FatalF("[ERROR]: %v", err.Error())
         return
@@ -61,9 +63,8 @@ func shutdown() {
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
 	<-sc
 
-	logger.Logger.InfoF(s.State.User.Username + " is shutting down.")
+	logger.Logger.InfoF(session.State.User.Username + " is shutting down.")
 
-	commands.Remove(s)
-	
-	s.Close()
+	commands.Remove(session)
+	session.Close()
 }
