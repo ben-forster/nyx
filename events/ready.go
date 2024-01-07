@@ -6,7 +6,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func Ready(s *discordgo.Session, r *discordgo.Ready) {
+func Ready(s *discordgo.Session, e *discordgo.Ready) {
 	err := s.UpdateListeningStatus("/help")
 	if err != nil {
 		logger.Logger.WarningF("[ERROR]: %s", err.Error())
