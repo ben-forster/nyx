@@ -32,7 +32,7 @@ func DogHandler(s *discordgo.Session, i *discordgo.InteractionCreate) {
         return
     }
 
-	client := http.Client{Timeout: 10 * time.Second}
+	client := http.Client{Timeout: 3 * time.Second}
 
 	response, err := client.Get("https://some-random-api.com/animal/dog")
 
