@@ -6,11 +6,11 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func Ready(session *discordgo.Session, event *discordgo.Ready) {
-	err := session.UpdateListeningStatus("/help")
+func Ready(s *discordgo.Session, r *discordgo.Ready) {
+	err := s.UpdateListeningStatus("/help")
 	if err != nil {
 		logger.Logger.WarningF("[ERROR]: %s", err.Error())
 	}
 
-	logger.Logger.InfoF("[%s:%s]", session.State.User.Username, "is now online.")
+	logger.Logger.InfoF("[%s:%s]", s.State.User.Username, "is now online.")
 }
