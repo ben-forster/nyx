@@ -32,10 +32,10 @@ func main() {
 	config.ReadConfig()
 
 	s, err := discordgo.New(fmt.Sprintf("Bot %v", config.Token))
-    if err != nil {
-      	logger.Logger.FatalF("[ERROR]: %v", err.Error())
-        return
-    }
+   	if err != nil {
+      		logger.Logger.FatalF("[ERROR]: %v", err.Error())
+        	return
+    	}
 	defer s.Close()
 
 	session = s
