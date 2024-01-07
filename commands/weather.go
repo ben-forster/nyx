@@ -71,7 +71,7 @@ func WeatherHandler(s *discordgo.Session, i *discordgo.InteractionCreate) {
 
 	weatherURL := fmt.Sprintf("%sappid=%s&q=%s&units=%s", OWMURL, OW_TOKEN, city, units)
 
-	client := http.Client{Timeout: 10 * time.Second}
+	client := http.Client{Timeout: 3 * time.Second}
 
 	response, err := client.Get(weatherURL)
 
